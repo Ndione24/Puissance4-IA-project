@@ -4,13 +4,13 @@ public class Grille {
 	private static int[][] grille =new int[7][7];
 
 	/**
-	 * Constructeur qui initialise la ligne et la colonne à 7
+	 * Constructeur qui initialise la ligne et la colonne Ã  7
 	 */
 	public Grille() {
 	
 	}
 	/**
-	 * met tout à zero
+	 * met tout Ã  zero
 	 */
 	public static void initialiserGrille() {
 		for(int i=0;i<7;i++)
@@ -26,7 +26,7 @@ public class Grille {
 	}
 
 	/**
-	 * méthode retournant une réf de cette grille
+	 * mÃ©thode retournant une rÃ©f de cette grille
 	 * 
 	 * @return la grille
 	 */
@@ -35,7 +35,7 @@ public class Grille {
 	}
 
 	/**
-	 * cette méthode affiche l'etat courant de la grille
+	 * cette mÃ©thode affiche l'etat courant de la grille
 	 */
 	public static void afficherGrille() {
 		afficherNumColonnes();
@@ -56,10 +56,10 @@ public class Grille {
 	}
 
 	/**
-	 * Méthode nous disant si la case est pleine ou pas
+	 * MÃ©thode nous disant si la case est pleine ou pas
 	 * 
 	 * @param numColonne le numero de la colonne
-	 * @return un boolean indiquant si on peut continuer à jour ou pas
+	 * @return un boolean indiquant si on peut continuer Ã  jour ou pas
 	 */
 	public static boolean coupPossible(int numColonne) {
 		boolean b = false;
@@ -74,7 +74,7 @@ public class Grille {
 
 	/**
 	 * permet de savoir si une colonne est pleine ou pas
-	 * @param col le numéro de la colonne
+	 * @param col le numÃ©ro de la colonne
 	 * @return vraie su la colonne est pleine
 	 */
 	public static boolean estColonnePleine(int col) {
@@ -82,9 +82,9 @@ public class Grille {
 	}
 	
 	/**
-	 * place le pion du joueur dans la colonne donnée
-	 * @param col le numéro de la colonne
-	 * @param player le numéro du joueur
+	 * place le pion du joueur dans la colonne donnÃ©e
+	 * @param col le numÃ©ro de la colonne
+	 * @param player le numÃ©ro du joueur
 	 */
 	public static void playColumn (int col , int player) {
 		Joueur.setNumJoueur(player);
@@ -92,9 +92,9 @@ public class Grille {
 	}
 	
 	/**
-	 * determine si la partie est remportée par 
+	 * determine si la partie est remportÃ©e par 
 	 * un joueur
-	 * @return vrai si on a 4 pions alignés
+	 * @return vrai si on a 4 pions alignÃ©s
 	 */
 	public static boolean  aGagneJoueur() 
 	{//A faire!!!
@@ -103,9 +103,9 @@ public class Grille {
 	}
 	
 	/**
-	 * Permet de chercher 4 pions alignés
+	 * Permet de chercher 4 pions alignÃ©s
 	 * dans la grille
-	 * @return vrai si on a 4 pions de même
+	 * @return vrai si on a 4 pions de mÃªme
 	 * 
 	 */
 	public static boolean hAlign() 
@@ -114,32 +114,44 @@ public class Grille {
 		int col=0;
 		int compteur=0;
 		int pion=0;
+		int i=1;
 		while(ligne>=0 && col<7 && !(compteur==4)) 
 		{
-			//si le jeu a commencé
+			//si le jeu a commencÃ©
 			if(grille[ligne][col]!=0) 
 			{
 				pion=grille[ligne][col];
 				compteur++;
-				for(int i=1;i<7;i++) 
+				while(i<7) 
 				{
-					if(pion==grille[ligne][i]) 
+					col=i;
+					if(pion==grille[ligne][col]) 
 					{
 						compteur++;
+						i++;
 						if(compteur==4) 
 						{
 							return true;
 						}
-					}else compteur=0;
+					}else 
+					{ compteur=0;
+					pion=grille[ligne][col];
+					  i++;
+					}
+					//si on a parcourue toute la ligne
+					if(i==6) col=0;
+					
 				}
 			}
 			if(pion!=0 && compteur==4) 
 			{
 				return true;
 			}
+			//on passe Ã  la ligne d'en haut de la grille
+			ligne--;
 		}//fin while
 		
-		//si on a pas de pions alignés
+		//si on a pas de pions alignÃ©s
 		return false;
 	}
 }
