@@ -154,4 +154,5 @@ public class Grille {
 		//si on a pas de pions alignés
 		return false;
 	}
+	//
 }
