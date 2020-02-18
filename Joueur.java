@@ -1,10 +1,19 @@
 package up.mi.ken;
 
+
+//enlever les static et revoir le jeu
+
+package ia.ndione.project;
+
 public class Joueur {
+	
+	//??? static ???
 	private static int numJoueur=1;
 
-	public Joueur() {
+	private int nbFoisJouer;
+	public Joueur(){
 		
+		this.nbFoisJouer=0;
 	}
 
 	public static int getNumJoueur() {
@@ -15,26 +24,57 @@ public class Joueur {
 		Joueur.numJoueur = numJoueur;
 	}
 
-	public static void jouerCoup(int numColonne) 
+	/**
+	 * 
+	 * @param numColonne
+	 * @return
+	 */
+	public static int jouerCoup(int numColonne) 
 	{
-		int i=6;
+		
+		if((numColonne)>7) 
+		{
+			System.out.println("pas possible de jour Ã  la colonne "+numColonne);
+			
+		}
+		
+		int i=5;
+											 //numColonne ou numColonne -1
 		while(i>=0 && !Grille.estColonnePleine(numColonne)) 
 		{
-			if(Grille.getGrille()[i][numColonne-1]==0) 
+			if(Grille.getGrille()[i][numColonne-1]=='0') 
 			{
-				Grille.getGrille()[i][numColonne-1]=Joueur.getNumJoueur();
-				return;
+				Grille.getGrille()[i][numColonne-1]=playerToChar(Joueur.getNumJoueur());
+				return i;
 			}
 			else i--;
 		}
+		
+		return i;
 	}
+		
+	public static char playerToChar(int player) 
+	{
+		if(player==1) 
+		{
+			return 'O';
+		}
+		//player==2 ?
+		else 
+		{
+			return 'X';
+		}
+		
+		
+	}
+	
 
 	/**
 	 * 
-	 * @param player le numéro couraant du joueur
-	 * @return le numéro du joueur suivant
+	 * @param player le numÃ©ro couraant du joueur
+	 * @return le numÃ©ro du joueur suivant
 	 */
-	public static int joueurSuivant(int player) {
+	public static int joueurSuivant() {
 		if (Joueur.getNumJoueur() == 1)
 			return 2;
 		else
